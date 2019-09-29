@@ -19,12 +19,6 @@ update-locale LC_TELEPHONE=nl_BE.UTF-8
 update-locale LC_MEASUREMENT=nl_BE.UTF-8
 update-locale LC_IDENTIFICATION=nl_BE.UTF-8
 
-adduser tvermeersch
-adduser tvermeersch sudo
-su tvermeersch
-
-cd /home/tvermeersch
-
 echo "starting system optimalization for ubuntu 18.04"
 echo "changing timezone"
 timedatectl set-timezone Europe/Brussels
