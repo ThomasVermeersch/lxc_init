@@ -2,7 +2,6 @@
 
 pubkey="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDTqJS1AqRKQW3Paez7lzti/RW94YYesUKRmN3JRx3mHifoLjezxh1eN++mPAXnBG0fMwAkiOC4vyWgQEZDZQjn2V2ZTkefztUxLIcfn7OY7sU9ivdftthByyQQ8f06UmXfgiOl0d5Nm+2Dy9gr4Vd5JhtdlYCe4xI+X998Lcgbil0wG/WyTfXhwyXB+K5l5CJmqSr1HluAfd6YNO7tK4KgaHcv7PODRmy4E9jvZ/jFOSU4MRL30p9LgN2qjMhmJQM92fpen7p/EBSk3m21GuB4y+K5SGGIjPiS5eXampnV2pBvxS6uT/puQD69ZyTn1rpl1KLpnJEH1/BWSrhqhRdKbdkLlSufadYrE19k+C/4qZSOTiyKRzKGMWDQduA1WZxcUdxh2N5jqG47zIDsEwfcAPA/eMe5z14lH8nHYIFy4cReTvRcz6d9ttntp+CAYPTxVrbgRWFu6gaLgjNcj/lkcTNFOG4VYo7q6SNhoCXD8WETx2END+Pz3LpB9TATCwk= huaweipsmart"
 pubkey2="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCskXKRwkMSKBUxvkv+pTexFY9JGbnqd6y5a5P6XHaBVaBkoBMzqV1ey/zyM1/GHnFIbJJa4wB3DNn9O69uszbR9ctfAeicm3zwdxnboAfpwm32p8IYlVM7S/dGRTtdmDJOrlgE9OVEeomOG48PclypI+8lewSTHZk1SEjMObMAM7a0/mjED0Q6+vhJ1PM99JJSxklSg92/hZeYMturXc+t/CQbSh1pqSqIZOt2dtDZ5RSpXy4dcp+/yslS2DPoSTxUvbl0lBor690fU4H+Eq4rW4n/eKDr2m28pm0csiwH+sw/378ZRtuxoEiTXYHHc4OH9IjmVrv/UsGg/TFGrpD5 backup"
-sshport="22"
 
 locale
 locale-gen en_US.UTF-8
@@ -39,13 +38,6 @@ fi
 
 sshdir="/etc/ssh/sshd_config"
 
-read -p "Do you want a custom ssh port (y/n): " choice
-case "$choice" in 
-  y|Y ) read -p "Enter a port: " sshport;;
-  n|N ) echo "keeping standard port 22";;
-  * ) echo "invalid";;
-esac
-
 echo "PasswordAuthentication no" >> $sshdir
 echo "Ciphers aes128-ctr,aes192-ctr,aes256-ctr" >> $sshdir
 echo "HostKeyAlgorithms ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,ssh-rsa,ssh-dss" >> $sshdir
@@ -56,9 +48,9 @@ echo "AllowTcpForwarding no" >> $sshdir
 echo "AllowStreamLocalForwarding no" >> $sshdir
 echo "GatewayPorts no" >> $sshdir
 echo "PermitTunnel no" >> $sshdir
-echo "Port" $sshport >> $sshdir
+echo "Port 22345" >> $sshdir
 echo "PermitRootLogin no" >> $sshdir
 
 systemctl restart ssh
-echo "make sure to update your firewall to allow port " $sshport
+echo "make sure to update your firewall to allow port 22345"
 echo "done."
